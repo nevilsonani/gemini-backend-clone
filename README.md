@@ -11,6 +11,9 @@ A scalable, production-ready FastAPI backend for Gemini-style chatrooms with OTP
 - [Queue System (Celery/Redis)](#queue-system-celeryredis)
 - [Gemini API Integration](#gemini-api-integration)
 - [Design Decisions & Assumptions](#design-decisions--assumptions)
+- [Testing via Postman](#testing-via-postman)
+- [Deployment Guide](#deployment-guide)
+- [Assignment Submission Checklist](#assignment-submission-checklist)
 
 ---
 
@@ -33,18 +36,6 @@ A scalable, production-ready FastAPI backend for Gemini-style chatrooms with OTP
 - **Celery**: Async Gemini processing
 - **Stripe**: Subscription management
 - **Pydantic v2**: Data validation
-
-```
-[Client]
-   |
-[FastAPI Backend] <--- JWT Auth, Stripe, etc.
-   |        |
-   |        +-- [PostgreSQL] (users, chatrooms, messages)
-   |        +-- [Redis] (cache, Celery broker)
-   |        +-- [Celery Worker] (async Gemini tasks)
-```
-
----
 
 ## Setup & Run
 
@@ -69,6 +60,24 @@ REDIS_URL=redis://localhost:6379/0
 - **Redis**: `redis-server` (or Memurai on Windows)
 - **Celery Worker**: `celery -A celery_worker.celery_app worker -Q gemini --loglevel=info`
 - **FastAPI**: `uvicorn app.main:app --reload --host 0.0.0.0 --port 8000`
+
+---
+
+## Architecture Overview
+- **FastAPI**: Main web framework
+- **PostgreSQL**: Main DB (async SQLAlchemy)
+- **Redis**: Caching & Celery broker
+- **Celery**: Async Gemini processing
+- **Stripe**: Subscription management
+- **Pydantic v2**: Data validation
+
+[Client]
+   |
+[FastAPI Backend] <--- JWT Auth, Stripe, etc.
+   |        |
+   |        +-- [PostgreSQL] (users, chatrooms, messages)
+   |        +-- [Redis] (cache, Celery broker)
+   |        +-- [Celery Worker] (async Gemini tasks)
 
 ---
 
@@ -103,6 +112,18 @@ REDIS_URL=redis://localhost:6379/0
 
 ---
 
+## Access & Deployment Instructions
+- After deploying, update your Postman collection base URL.
+- Share your public API URL for demo/testing.
+- Make sure your Stripe webhook is set to the deployed `/webhook/stripe` URL.
+
+### **Recommended: [Render](https://render.com), [Railway](https://railway.app), or [fly.io](https://fly.io)**
+- All support FastAPI, background workers, Postgres, and Redis.
+- Deploy FastAPI app, Celery worker, Postgres, and Redis as separate services.
+- Expose FastAPI port publicly (e.g., 0.0.0.0:8000)
+- Set all environment variables in the cloud dashboard.
+- Point Stripe webhook to your public `/webhook/stripe` endpoint.
+
 #### **Example Render Procfile**
 ```
 web: uvicorn app.main:app --host 0.0.0.0 --port $PORT
@@ -111,4 +132,29 @@ worker: celery -A celery_worker.celery_app worker -Q gemini --loglevel=info
 
 ---
 
+## Assignment Submission Checklist
+- [ ] Deployed to Render, Railway, or fly.io
+- [ ] FastAPI app, Celery worker, Postgres, and Redis are separate services
+- [ ] Exposed FastAPI port publicly (e.g., 0.0.0.0:8000)
+- [ ] Set all environment variables in the cloud dashboard
+- [ ] Pointed Stripe webhook to the public `/webhook/stripe` endpoint
+- [ ] Tested all endpoints using Postman
+- [ ] Verified OTP-based JWT authentication
+- [ ] Verified user chatrooms (CRUD, per-user isolation)
+- [ ] Verified async Gemini API integration
+- [ ] Verified Stripe subscriptions (Basic/Pro tiers, webhook, status)
+- [ ] Verified rate limiting (daily message cap for Basic users)
+- [ ] Verified Redis caching (chatroom list)
+- [ ] Verified centralized error handling (consistent JSON errors)
 
+---
+
+## Access & Deployment Instructions
+- After deploying, update your Postman collection base URL.
+- Share your public API URL for demo/testing.
+- Make sure your Stripe webhook is set to the deployed `/webhook/stripe` URL.
+
+---
+
+## Questions?
+Open an issue or contact the maintainer.
