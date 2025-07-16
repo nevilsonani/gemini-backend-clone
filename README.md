@@ -105,15 +105,6 @@ REDIS_URL=redis://localhost:6379/0
 
 ---
 
-## Deployment Guide
-
-### **Recommended: [Render](https://render.com), [Railway](https://railway.app), or [fly.io](https://fly.io)**
-- All support FastAPI, background workers, Postgres, and Redis.
-- Deploy FastAPI app, Celery worker, Postgres, and Redis as separate services.
-- Expose FastAPI port publicly (e.g., 0.0.0.0:8000)
-- Set all environment variables in the cloud dashboard.
-- Point Stripe webhook to your public `/webhook/stripe` endpoint.
-
 #### **Example Render Procfile**
 ```
 web: uvicorn app.main:app --host 0.0.0.0 --port $PORT
