@@ -1,4 +1,4 @@
-# Kuvaka Gemini-Style Backend
+# Kuvaka Gemini-Backend-Clone
 
 A scalable, production-ready FastAPI backend for Gemini-style chatrooms with OTP/JWT authentication, Stripe subscriptions, async Gemini integration, Redis caching, and robust error handling.
 
