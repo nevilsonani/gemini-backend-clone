@@ -17,3 +17,8 @@ app.include_router(user.router, prefix="/user", tags=["user"])
 app.include_router(chatroom.router, tags=["chatroom"])
 app.include_router(subscription.router, tags=["subscription"])
 app.include_router(messages_cleanup.router)
+
+# Render free tier: auto-initialize DB if env var set
+if os.environ.get("RENDER_DB_INIT") == "1":
+    import subprocess
+    subprocess.run(["python", "app/db/init_db.py"])
