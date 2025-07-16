@@ -1,0 +1,2 @@
+# Add redis for async caching support
+redis>=4.2.0
