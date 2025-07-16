@@ -20,18 +20,31 @@ async def subscribe_pro(
     return {"checkout_url": url}
 
 # POST /webhook/stripe - Stripe webhook
+import os
+
 @router.post("/webhook/stripe")
 async def stripe_webhook(request: Request, db: AsyncSession = Depends(get_db)):
     payload = await request.body()
     sig_header = request.headers.get("stripe-signature")
-    # For demo, skip signature verification (add for production!)
+    STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
     event = None
-    try:
-        event = stripe_service.stripe.Webhook.construct_event(
-            payload, sig_header, "whsec_..."  # Replace with your Stripe webhook secret
-        )
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Webhook error: {str(e)}")
+    # If secret is set, verify signature
+    if STRIPE_WEBHOOK_SECRET:
+        try:
+            event = stripe_service.stripe.Webhook.construct_event(
+                payload, sig_header, STRIPE_WEBHOOK_SECRET
+            )
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Webhook error: {str(e)}")
+    else:
+        # For local/dev: skip verification
+        import json
+        try:
+            event = stripe_service.stripe.Event.construct_from(
+                json.loads(payload), stripe_service.stripe.api_key
+            )
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Webhook error: {str(e)}")
     # Handle event types
     if event["type"] == "checkout.session.completed":
         session = event["data"]["object"]
