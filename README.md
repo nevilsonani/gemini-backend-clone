@@ -52,8 +52,7 @@ A scalable, production-ready FastAPI backend for Gemini-style chatrooms with OTP
 
 ### 1. Clone & Install
 ```sh
-git clone <your-repo-url>
-cd <project-root>
+git clone https://github.com/nevilsonani/gemini-backend-clone.git
 pip install -r requirements.txt
 ```
 
