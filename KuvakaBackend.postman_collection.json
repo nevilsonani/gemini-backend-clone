@@ -20,7 +20,7 @@
               "mode": "raw",
               "raw": "{\n  \"mobile_number\": \"9876543210\",\n  \"password\": \"testpass\"\n}"
             },
-            "url": { "raw": "http://localhost:8000/auth/signup", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","signup"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/auth/signup", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","signup"] }
           }
         },
         {
@@ -34,7 +34,7 @@
               "mode": "raw",
               "raw": "{\n  \"mobile_number\": \"9876543210\"\n}"
             },
-            "url": { "raw": "http://localhost:8000/auth/send-otp", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","send-otp"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/auth/send-otp", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","send-otp"] }
           }
         },
         {
@@ -48,7 +48,7 @@
               "mode": "raw",
               "raw": "{\n  \"mobile_number\": \"9876543210\",\n  \"otp\": \"123456\"\n}"
             },
-            "url": { "raw": "http://localhost:8000/auth/verify-otp", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","verify-otp"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/auth/verify-otp", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","verify-otp"] }
           }
         },
         {
@@ -62,7 +62,7 @@
               "mode": "raw",
               "raw": "{\n  \"mobile_number\": \"9876543210\"\n}"
             },
-            "url": { "raw": "http://localhost:8000/auth/forgot-password", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","forgot-password"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/auth/forgot-password", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","forgot-password"] }
           }
         },
         {
@@ -77,7 +77,7 @@
               "mode": "raw",
               "raw": "{\n  \"old_password\": \"testpass\",\n  \"new_password\": \"newpass123\"\n}"
             },
-            "url": { "raw": "http://localhost:8000/auth/change-password", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","change-password"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/auth/change-password", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","change-password"] }
           }
         }
       ]
@@ -92,7 +92,7 @@
             "header": [
               { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
             ],
-            "url": { "raw": "http://localhost:8000/user/me", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["user","me"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/user/me", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["user","me"] }
           }
         }
       ]
@@ -112,7 +112,7 @@
               "mode": "raw",
               "raw": "{\n  \"name\": \"My Chatroom\"\n}"
             },
-            "url": { "raw": "http://localhost:8000/chatroom", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/chatroom", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom"] }
           }
         },
         {
@@ -122,7 +122,7 @@
             "header": [
               { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
             ],
-            "url": { "raw": "http://localhost:8000/chatroom", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/chatroom", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom"] }
           }
         },
         {
@@ -132,7 +132,7 @@
             "header": [
               { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
             ],
-            "url": { "raw": "http://localhost:8000/chatroom/{{chatroom_id}}", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom","{{chatroom_id}}"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/chatroom/{{chatroom_id}}", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom","{{chatroom_id}}"] }
           }
         },
         {
@@ -148,7 +148,7 @@
               "raw": "{\n  \"content\": \"Hello, Gemini!\"\n}"
             },
             "url": {
-              "raw": "http://localhost:8000/chatroom/{{chatroom_id}}/message",
+              "raw": "https://gemini-backend-clone-hyce.onrender.com/chatroom/{{chatroom_id}}/message",
               "protocol": "http",
               "host": ["localhost"],
               "port": "8000",
@@ -165,7 +165,7 @@
               { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
             ],
             "url": {
-              "raw": "http://localhost:8000/chatroom/{{chatroom_id}}/messages",
+              "raw": "https://gemini-backend-clone-hyce.onrender.com/chatroom/{{chatroom_id}}/messages",
               "protocol": "http",
               "host": ["localhost"],
               "port": "8000",
@@ -186,7 +186,7 @@
             "header": [
               { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
             ],
-            "url": { "raw": "http://localhost:8000/subscribe/pro", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["subscribe","pro"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/subscribe/pro", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["subscribe","pro"] }
           }
         },
         {
@@ -200,7 +200,7 @@
               "mode": "raw",
               "raw": "{}"
             },
-            "url": { "raw": "http://localhost:8000/webhook/stripe", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["webhook","stripe"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/webhook/stripe", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["webhook","stripe"] }
           }
         },
         {
@@ -210,7 +210,7 @@
             "header": [
               { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
             ],
-            "url": { "raw": "http://localhost:8000/subscription/status", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["subscription","status"] }
+            "url": { "raw": "https://gemini-backend-clone-hyce.onrender.com/subscription/status", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["subscription","status"] }
           }
         }
       ]
