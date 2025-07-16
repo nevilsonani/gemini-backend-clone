@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+SQLAlchemy[asyncio]
+asyncpg
+alembic
+python-dotenv
+pydantic
+httpx
+redis
+celery
+stripe
+passlib[bcrypt]
+PyJWT
+python-multipart
