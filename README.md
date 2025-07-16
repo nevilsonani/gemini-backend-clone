@@ -41,7 +41,7 @@ A scalable, production-ready FastAPI backend for Gemini-style chatrooms with OTP
 
 ### 1. Clone & Install
 ```sh
-git clone <your-repo-url>
+git clone https://github.com/nevilsonani/gemini-backend-clone.git
 cd <project-root>
 pip install -r requirements.txt
 ```
@@ -154,7 +154,3 @@ worker: celery -A celery_worker.celery_app worker -Q gemini --loglevel=info
 - Share your public API URL for demo/testing.
 - Make sure your Stripe webhook is set to the deployed `/webhook/stripe` URL.
 
----
-
-## Questions?
-Open an issue or contact the maintainer.
