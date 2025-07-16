@@ -126,7 +126,4 @@ worker: celery -A celery_worker.celery_app worker -Q gemini --loglevel=info
 - Share your public API URL for demo/testing.
 - Make sure your Stripe webhook is set to the deployed `/webhook/stripe` URL.
 
----
 
-## Questions?
-Open an issue or contact the maintainer.
