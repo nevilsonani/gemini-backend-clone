@@ -1,0 +1,222 @@
+{
+  "info": {
+    "_postman_id": "c5e6b5b2-7e2c-4f4c-9b1c-123456789abc",
+    "name": "Kuvaka Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for Kuvaka Gemini-style backend. Includes all endpoints, JWT auth, and Stripe."
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile_number\": \"9876543210\",\n  \"password\": \"testpass\"\n}"
+            },
+            "url": { "raw": "http://localhost:8000/auth/signup", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","signup"] }
+          }
+        },
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile_number\": \"9876543210\"\n}"
+            },
+            "url": { "raw": "http://localhost:8000/auth/send-otp", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","send-otp"] }
+          }
+        },
+        {
+          "name": "Verify OTP (Get JWT)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile_number\": \"9876543210\",\n  \"otp\": \"123456\"\n}"
+            },
+            "url": { "raw": "http://localhost:8000/auth/verify-otp", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","verify-otp"] }
+          }
+        },
+        {
+          "name": "Forgot Password (Send OTP)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile_number\": \"9876543210\"\n}"
+            },
+            "url": { "raw": "http://localhost:8000/auth/forgot-password", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","forgot-password"] }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"old_password\": \"testpass\",\n  \"new_password\": \"newpass123\"\n}"
+            },
+            "url": { "raw": "http://localhost:8000/auth/change-password", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["auth","change-password"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "url": { "raw": "http://localhost:8000/user/me", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["user","me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chatroom",
+      "item": [
+        {
+          "name": "Create Chatroom",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Chatroom\"\n}"
+            },
+            "url": { "raw": "http://localhost:8000/chatroom", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom"] }
+          }
+        },
+        {
+          "name": "List Chatrooms",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "url": { "raw": "http://localhost:8000/chatroom", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom"] }
+          }
+        },
+        {
+          "name": "Get Chatroom Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "url": { "raw": "http://localhost:8000/chatroom/{{chatroom_id}}", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["chatroom","{{chatroom_id}}"] }
+          }
+        },
+        {
+          "name": "Send Message to Chatroom (Async Gemini)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Hello, Gemini!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/chatroom/{{chatroom_id}}/message",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["chatroom","{{chatroom_id}}","message"]
+            },
+            "description": "Send a message to the chatroom. Gemini response will be filled in asynchronously. Use the 'Get All Messages in Chatroom' request after a few seconds to see the Gemini response."
+          }
+        },
+        {
+          "name": "Get All Messages in Chatroom",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/chatroom/{{chatroom_id}}/messages",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["chatroom","{{chatroom_id}}","messages"]
+            },
+            "description": "Get all messages in the chatroom. After sending a message, wait a few seconds and fetch this to see the Gemini AI response."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscription",
+      "item": [
+        {
+          "name": "Subscribe Pro (Stripe Checkout)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "url": { "raw": "http://localhost:8000/subscribe/pro", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["subscribe","pro"] }
+          }
+        },
+        {
+          "name": "Stripe Webhook (simulate)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": { "raw": "http://localhost:8000/webhook/stripe", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["webhook","stripe"] }
+          }
+        },
+        {
+          "name": "Subscription Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "url": { "raw": "http://localhost:8000/subscription/status", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["subscription","status"] }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "jwt_token", "value": "" }
+  ]
+}
