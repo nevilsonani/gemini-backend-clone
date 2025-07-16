@@ -11,8 +11,6 @@ A scalable, production-ready FastAPI backend for Gemini-style chatrooms with OTP
 - [Queue System (Celery/Redis)](#queue-system-celeryredis)
 - [Gemini API Integration](#gemini-api-integration)
 - [Design Decisions & Assumptions](#design-decisions--assumptions)
-- [Testing via Postman](#testing-via-postman)
-- [Deployment Guide](#deployment-guide)
 
 ---
 
