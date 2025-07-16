@@ -15,6 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose port for Uvicorn
+ENV PYTHONPATH=/app
+
 EXPOSE 10000
 
 # Default command to run FastAPI app
