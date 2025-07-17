@@ -157,6 +157,5 @@ worker: celery -A celery_worker.celery_app worker -Q gemini --loglevel=info
 
 ## Access & Deployment Instructions
 - After deploying, update your Postman collection base URL.
-- Share your public API URL for demo/testing.
 - Make sure your Stripe webhook is set to the deployed `/webhook/stripe` URL.
 
