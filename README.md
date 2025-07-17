@@ -116,6 +116,13 @@ REDIS_URL=redis://localhost:6379/0
 - Share your public API URL for demo/testing.
 - Make sure your Stripe webhook is set to the deployed `/webhook/stripe` URL.
 
+
+---
+
+## Known Limitations
+
+- **Render Free Tier:** Only one service can run at a time. Async Gemini tasks (via Celery) require a worker process. For full async demo, run the worker locally or use a paid plan.
+
 ### **Recommended: [Render](https://render.com), [Railway](https://railway.app), or [fly.io](https://fly.io)**
 - All support FastAPI, background workers, Postgres, and Redis.
 - Deploy FastAPI app, Celery worker, Postgres, and Redis as separate services.
